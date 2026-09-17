@@ -7,64 +7,24 @@
 <style>
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0}
-body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow:hidden;background:#08090d;color:#fff}
-button,input{font:inherit}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow:hidden;background:#090a0f;color:#fff}
+button,input,textarea{font:inherit}
 button{border:0}
 .desktop{position:relative;width:100%;height:100vh;overflow:hidden;background:url("images/Japan.svg") center/cover no-repeat}
-.desktop:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,13,.2),rgba(5,7,13,.05) 55%,rgba(5,7,13,.28));pointer-events:none}
-.topbar{position:absolute;z-index:20;top:0;left:0;width:100%;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,10,16,.78);border-bottom:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px)}
-.brand{font-size:17px;font-weight:700;letter-spacing:-.3px}
-.brand span{color:#f08ba8}
-.creator{font-size:12px;color:#d8d8dd;margin-right:18px}
-.bar-right{display:flex;align-items:center}
-.clock{font-size:13px;color:#e7e7eb;min-width:72px;text-align:right}
-.workspace{position:absolute;z-index:2;inset:52px 0 0;padding:28px}
-.app{width:82px;text-align:center;cursor:pointer;user-select:none}
-.app-icon{width:68px;height:68px;margin:auto;border-radius:17px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.3),0 0 0 1px rgba(255,255,255,.16);transition:transform .16s ease}
-.app:hover .app-icon{transform:translateY(-4px) scale(1.03)}
-.app img{width:100%;height:100%;display:block}
-.app-name{font-size:12px;margin-top:8px;text-shadow:0 2px 5px rgba(0,0,0,.8)}
-.welcome{position:fixed;z-index:100;inset:0;display:flex;align-items:center;justify-content:center;background:url("images/Japan.svg") center/cover no-repeat;transition:opacity .55s ease,visibility .55s ease}
-.welcome:after{content:"";position:absolute;inset:0;background:rgba(4,5,10,.48)}
-.welcome-card{position:relative;z-index:1;width:min(600px,calc(100% - 40px));padding:58px 44px;text-align:center;border:1px solid rgba(255,255,255,.18);border-radius:28px;background:rgba(10,12,20,.54);box-shadow:0 30px 80px rgba(0,0,0,.42);backdrop-filter:blur(22px)}
-.welcome-kicker{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#f3a0b8;margin-bottom:18px}
-.welcome h1{font-size:clamp(48px,8vw,82px);line-height:.95;margin:0;letter-spacing:-4px}
-.welcome h1 span{color:#f08ba8}
-.welcome p{margin:20px 0 30px;color:#d9d9df;font-size:15px}
-.start{padding:13px 27px;border-radius:999px;background:#fff;color:#101116;cursor:pointer;font-weight:650;transition:transform .15s ease,box-shadow .15s ease}
-.start:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,255,255,.16)}
-.hidden{opacity:0;visibility:hidden}
-.browser{position:absolute;z-index:30;top:85px;left:50%;width:min(980px,calc(100% - 48px));height:min(690px,calc(100% - 115px));transform:translateX(-50%) scale(.97);display:none;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.17);border-radius:18px;background:#0c0f15;box-shadow:0 28px 80px rgba(0,0,0,.52)}
-.browser.open{display:flex;animation:browserIn .2s ease forwards}
-@keyframes browserIn{to{transform:translateX(-50%) scale(1)}}
-.browser-head{height:54px;display:flex;align-items:center;gap:9px;padding:0 12px;background:#11151d;border-bottom:1px solid rgba(255,255,255,.1)}
-.browser-controls{display:flex;gap:5px}
-.control{width:32px;height:32px;border-radius:9px;background:#1b202a;color:#d9dce2;cursor:pointer}
-.control:hover{background:#252b37}
-.address{flex:1;height:34px;padding:0 13px;border:1px solid rgba(255,255,255,.11);border-radius:10px;outline:none;background:#0b0e14;color:#e9eaf0;font-size:13px}
-.close-browser{width:32px;height:32px;border-radius:9px;background:#1b202a;color:#ddd;cursor:pointer}
-.browser-page{position:relative;flex:1;background:#0b0d12}
-.home{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(238,119,154,.12),transparent 35%),#0b0d12}
-.home-logo{font-size:46px;font-weight:700;letter-spacing:-2px}
-.home-logo span{color:#f08ba8}
-.home-text{color:#969ba7;font-size:13px;margin:8px 0 22px}
-.search{display:flex;width:min(570px,80%);height:44px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#11151d;overflow:hidden}
-.search input{flex:1;background:transparent;border:0;outline:0;color:white;padding:0 15px;font-size:14px}
-.search button{width:78px;background:#f08ba8;color:#171019;cursor:pointer;font-weight:650}
-.frame{width:100%;height:100%;border:0;background:#fff;display:none}
-.frame.open{display:block}
-.fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;background:#0b0d12}
-.fallback.show{display:flex}
-.fallback-inner{max-width:430px}
-.fallback h2{margin:0 0 10px}
-.fallback p{color:#9ea4af;font-size:14px;line-height:1.5}
-.fallback a{display:inline-block;margin-top:12px;padding:10px 16px;border-radius:9px;background:#f08ba8;color:#171019;text-decoration:none;font-weight:650}
-@media(max-width:650px){
-.topbar{padding:0 12px}.creator{display:none}.workspace{padding:22px}
-.browser{width:calc(100% - 20px);height:calc(100% - 82px);top:64px}
-.browser-head{gap:5px}.control{width:30px;height:30px}.close-browser{width:30px;height:30px}
-.welcome-card{padding:45px 25px}.welcome h1{letter-spacing:-2px}
-}
+.desktop:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,13,.16),rgba(5,7,13,.02) 55%,rgba(5,7,13,.28));pointer-events:none}
+.topbar{position:absolute;z-index:40;top:0;left:0;width:100%;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,10,16,.78);border-bottom:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px)}
+.brand{font-size:17px;font-weight:700;letter-spacing:-.4px}.brand span{color:#f08ba8}
+.bar-right{display:flex;align-items:center}.creator{font-size:12px;color:#d8d8dd;margin-right:20px}.clock{font-size:13px;color:#e7e7eb;min-width:72px;text-align:right}
+.workspace{position:absolute;z-index:2;inset:52px 0 78px;padding:28px;display:grid;grid-template-columns:repeat(auto-fill,82px);grid-auto-rows:104px;gap:8px 18px;align-content:start}
+.app{width:82px;text-align:center;cursor:pointer;user-select:none}.app-icon{width:68px;height:68px;margin:auto;border-radius:17px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.3),0 0 0 1px rgba(255,255,255,.16);transition:transform .16s ease}.app:hover .app-icon{transform:translateY(-4px) scale(1.03)}.app img{width:100%;height:100%;display:block}.app-name{font-size:12px;margin-top:8px;text-shadow:0 2px 5px rgba(0,0,0,.8)}
+.dock{position:absolute;z-index:50;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(10,12,18,.72);backdrop-filter:blur(20px);box-shadow:0 15px 40px rgba(0,0,0,.35)}.dock .dock-app{width:48px;height:48px;border-radius:13px;overflow:hidden;cursor:pointer;transition:transform .16s ease}.dock .dock-app:hover{transform:translateY(-5px) scale(1.06)}.dock img{width:100%;height:100%;display:block}
+.welcome{position:fixed;z-index:100;inset:0;display:flex;align-items:center;justify-content:center;background:url("images/Japan.svg") center/cover no-repeat;transition:opacity .55s ease,visibility .55s ease}.welcome:after{content:"";position:absolute;inset:0;background:rgba(4,5,10,.48)}.welcome-card{position:relative;z-index:1;width:min(620px,calc(100% - 40px));padding:58px 44px;text-align:center;border:1px solid rgba(255,255,255,.18);border-radius:28px;background:rgba(10,12,20,.54);box-shadow:0 30px 80px rgba(0,0,0,.42);backdrop-filter:blur(22px)}.welcome-kicker{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#f3a0b8;margin-bottom:18px}.welcome h1{font-size:clamp(48px,8vw,82px);line-height:.95;margin:0;letter-spacing:-4px}.welcome h1 span{color:#f08ba8}.welcome p{margin:20px 0 30px;color:#d9d9df;font-size:15px}.start{padding:13px 27px;border-radius:999px;background:#fff;color:#101116;cursor:pointer;font-weight:650;transition:transform .15s ease,box-shadow .15s ease}.start:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,255,255,.16)}.hidden{opacity:0;visibility:hidden}
+.window{position:absolute;z-index:30;top:82px;left:50%;width:min(920px,calc(100% - 40px));height:min(650px,calc(100% - 120px));transform:translateX(-50%) scale(.97);display:none;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.17);border-radius:18px;background:rgba(12,15,21,.96);box-shadow:0 28px 80px rgba(0,0,0,.52)}.window.open{display:flex;animation:windowIn .18s ease forwards}@keyframes windowIn{to{transform:translateX(-50%) scale(1)}}.window-head{height:54px;flex:none;display:flex;align-items:center;gap:9px;padding:0 12px;background:#11151d;border-bottom:1px solid rgba(255,255,255,.1)}.window-title{font-size:13px;font-weight:650;flex:1}.window-actions{display:flex;gap:6px}.window-button{width:32px;height:32px;border-radius:9px;background:#1b202a;color:#ddd;cursor:pointer}.window-button:hover{background:#282f3b}
+.browser-page{position:relative;flex:1;min-height:0;background:#0b0d12}.browser-controls{display:flex;gap:5px}.control{width:32px;height:32px;border-radius:9px;background:#1b202a;color:#d9dce2;cursor:pointer}.control:hover{background:#252b37}.address{flex:1;height:34px;padding:0 13px;border:1px solid rgba(255,255,255,.11);border-radius:10px;outline:none;background:#0b0e14;color:#e9eaf0;font-size:13px}.home{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(238,119,154,.12),transparent 35%),#0b0d12}.home-logo{font-size:46px;font-weight:700;letter-spacing:-2px}.home-logo span{color:#f08ba8}.home-text{color:#969ba7;font-size:13px;margin:8px 0 22px}.search{display:flex;width:min(570px,80%);height:44px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#11151d;overflow:hidden}.search input{flex:1;background:transparent;border:0;outline:0;color:white;padding:0 15px;font-size:14px}.search button{width:78px;background:#f08ba8;color:#171019;cursor:pointer;font-weight:650}.frame{width:100%;height:100%;border:0;background:#fff;display:none}.frame.open{display:block}.fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;background:#0b0d12}.fallback.show{display:flex}.fallback-inner{max-width:430px}.fallback h2{margin:0 0 10px}.fallback p{color:#9ea4af;font-size:14px;line-height:1.5}.fallback a{display:inline-block;margin-top:12px;padding:10px 16px;border-radius:9px;background:#f08ba8;color:#171019;text-decoration:none;font-weight:650}
+.files-body,.notes-body,.settings-body,.gallery-body,.calc-body{flex:1;min-height:0;overflow:auto;padding:22px}.file-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.file-card{padding:18px;border-radius:14px;background:#151a23;border:1px solid rgba(255,255,255,.08);cursor:pointer}.file-card:hover{background:#1c222d}.file-symbol{font-size:30px;margin-bottom:12px}.file-name{font-size:13px}.file-meta{font-size:11px;color:#8f96a4;margin-top:5px}.notes-area{width:100%;height:100%;min-height:420px;resize:none;border:0;outline:0;border-radius:14px;background:#11151d;color:#e9eaf0;padding:20px;line-height:1.6}.settings-section{padding:18px;border-radius:14px;background:#151a23;margin-bottom:12px}.settings-label{font-size:14px;font-weight:650}.settings-description{font-size:12px;color:#939aa7;margin-top:5px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:20px}.toggle{width:48px;height:28px;border-radius:20px;background:#353b47;cursor:pointer;position:relative}.toggle:after{content:"";position:absolute;width:22px;height:22px;top:3px;left:3px;border-radius:50%;background:white;transition:.18s}.toggle.on{background:#f08ba8}.toggle.on:after{left:23px}.gallery-body{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:15px}.gallery-card{overflow:hidden;border-radius:15px;background:#151a23;border:1px solid rgba(255,255,255,.08)}.gallery-card img{width:100%;height:150px;object-fit:cover;display:block}.gallery-card div{padding:12px;font-size:12px;color:#dfe1e7}
+.calc-body{display:flex;justify-content:center;align-items:center}.calculator{width:min(330px,100%);padding:16px;border-radius:18px;background:#11151d;border:1px solid rgba(255,255,255,.08)}.calc-display{width:100%;height:74px;margin-bottom:12px;border-radius:12px;background:#090c11;color:#fff;text-align:right;padding:20px 14px;font-size:30px;overflow:hidden}.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.calc-key{height:54px;border-radius:12px;background:#1b202a;color:#eee;cursor:pointer;font-size:17px}.calc-key:hover{background:#272e3a}.calc-key.operator{background:#2a2026;color:#f3a0b8}.calc-key.equals{background:#f08ba8;color:#171019}
+body.light .desktop:after{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.01),rgba(255,255,255,.16))}.light .window{}
+@media(max-width:650px){.topbar{padding:0 12px}.creator{display:none}.workspace{padding:22px;grid-template-columns:repeat(3,82px);gap:8px}.window{width:calc(100% - 18px);height:calc(100% - 90px);top:64px}.dock{max-width:calc(100% - 18px);overflow:auto}.welcome-card{padding:45px 25px}.welcome h1{letter-spacing:-2px}}
 </style>
 </head>
 <body>
@@ -72,7 +32,7 @@ button{border:0}
 <div class="welcome-card">
 <div class="welcome-kicker">JapanOS</div>
 <h1>Welcome to <span>JapanOS</span></h1>
-<p>A clean desktop inspired by Japan, built to keep everything simple and close at hand.</p>
+<p>Your desktop. Your apps. Your space.</p>
 <button class="start" onclick="enterOS()">Get Started</button>
 </div>
 </div>
@@ -80,52 +40,90 @@ button{border:0}
 <div class="desktop">
 <div class="topbar">
 <div class="brand">Japan<span>OS</span></div>
-<div class="bar-right">
-<div class="creator">Created By Virat Reddy</div>
-<div class="clock" id="clock"></div>
-</div>
+<div class="bar-right"><div class="creator">Created By Virat Reddy</div><div class="clock" id="clock"></div></div>
 </div>
 
 <div class="workspace">
-<div class="app" onclick="openBrowser()">
-<div class="app-icon"><img src="images/Browser.svg" alt="Browser"></div>
-<div class="app-name">Browser</div>
+<div class="app" onclick="openWindow('browser')"><div class="app-icon"><img src="images/Browser.svg" alt="Browser"></div><div class="app-name">Browser</div></div>
+<div class="app" onclick="openWindow('files')"><div class="app-icon"><img src="images/Files.svg" alt="Files"></div><div class="app-name">Files</div></div>
+<div class="app" onclick="openWindow('notes')"><div class="app-icon"><img src="images/Notes.svg" alt="Notes"></div><div class="app-name">Notes</div></div>
+<div class="app" onclick="openWindow('calculator')"><div class="app-icon"><img src="images/Calculator.svg" alt="Calculator"></div><div class="app-name">Calculator</div></div>
+<div class="app" onclick="openWindow('settings')"><div class="app-icon"><img src="images/Settings.svg" alt="Settings"></div><div class="app-name">Settings</div></div>
+<div class="app" onclick="openWindow('gallery')"><div class="app-icon"><img src="images/Gallery.svg" alt="Gallery"></div><div class="app-name">Gallery</div></div>
+</div>
+
+<div class="dock">
+<div class="dock-app" onclick="openWindow('browser')"><img src="images/Browser.svg" alt="Browser"></div>
+<div class="dock-app" onclick="openWindow('files')"><img src="images/Files.svg" alt="Files"></div>
+<div class="dock-app" onclick="openWindow('notes')"><img src="images/Notes.svg" alt="Notes"></div>
+<div class="dock-app" onclick="openWindow('calculator')"><img src="images/Calculator.svg" alt="Calculator"></div>
+<div class="dock-app" onclick="openWindow('settings')"><img src="images/Settings.svg" alt="Settings"></div>
+<div class="dock-app" onclick="openWindow('gallery')"><img src="images/Gallery.svg" alt="Gallery"></div>
+</div>
+
+<div class="window" id="browser">
+<div class="window-head">
+<div class="browser-controls"><button class="control" onclick="goBack()">←</button><button class="control" onclick="goForward()">→</button><button class="control" onclick="reloadPage()">↻</button></div>
+<input class="address" id="address" value="japanos://home" onkeydown="addressKey(event)">
+<div class="window-title">Browser</div>
+<button class="window-button" onclick="closeWindow('browser')">×</button>
+</div>
+<div class="browser-page">
+<div class="home" id="home"><div class="home-logo">Japan<span>OS</span></div><div class="home-text">Search the web from JapanOS</div><form class="search" onsubmit="searchWeb(event)"><input id="searchInput" placeholder="Search the web"><button type="submit">Search</button></form></div>
+<iframe class="frame" id="frame" title="JapanOS Browser"></iframe>
+<div class="fallback" id="fallback"><div class="fallback-inner"><h2>This page cannot be shown here</h2><p>Some websites prevent other apps from displaying their pages inside a browser frame.</p><a id="fallbackLink" href="#" target="_blank" rel="noopener">Open Page</a></div></div>
 </div>
 </div>
 
-<div class="browser" id="browser">
-<div class="browser-head">
-<div class="browser-controls">
-<button class="control" onclick="goBack()">←</button>
-<button class="control" onclick="goForward()">→</button>
-<button class="control" onclick="reloadPage()">↻</button>
+<div class="window" id="files">
+<div class="window-head"><div class="window-title">Files</div><button class="window-button" onclick="closeWindow('files')">×</button></div>
+<div class="files-body"><div class="file-grid">
+<div class="file-card"><div class="file-symbol">⌂</div><div class="file-name">Home</div><div class="file-meta">Folder</div></div>
+<div class="file-card"><div class="file-symbol">▣</div><div class="file-name">Documents</div><div class="file-meta">Folder</div></div>
+<div class="file-card"><div class="file-symbol">▧</div><div class="file-name">Pictures</div><div class="file-meta">Folder</div></div>
+<div class="file-card"><div class="file-symbol">♫</div><div class="file-name">Music</div><div class="file-meta">Folder</div></div>
+<div class="file-card"><div class="file-symbol">◈</div><div class="file-name">JapanOS</div><div class="file-meta">System folder</div></div>
+<div class="file-card"><div class="file-symbol">◇</div><div class="file-name">README.md</div><div class="file-meta">Text file</div></div>
+</div></div>
 </div>
-<input class="address" id="address" value="japanos://home" onkeydown="addressKey(event)">
-<button class="close-browser" onclick="closeBrowser()">×</button>
+
+<div class="window" id="notes">
+<div class="window-head"><div class="window-title">Notes</div><button class="window-button" onclick="closeWindow('notes')">×</button></div>
+<div class="notes-body"><textarea class="notes-area" id="notesArea" placeholder="Start writing..."></textarea></div>
 </div>
-<div class="browser-page">
-<div class="home" id="home">
-<div class="home-logo">Japan<span>OS</span></div>
-<div class="home-text">Search the web from JapanOS</div>
-<form class="search" onsubmit="searchWeb(event)">
-<input id="searchInput" placeholder="Search the web">
-<button type="submit">Search</button>
-</form>
+
+<div class="window" id="calculator">
+<div class="window-head"><div class="window-title">Calculator</div><button class="window-button" onclick="closeWindow('calculator')">×</button></div>
+<div class="calc-body"><div class="calculator"><div class="calc-display" id="calcDisplay">0</div><div class="calc-grid">
+<button class="calc-key operator" onclick="calcClear()">AC</button><button class="calc-key operator" onclick="calcInput('(')">(</button><button class="calc-key operator" onclick="calcInput(')')">)</button><button class="calc-key operator" onclick="calcInput('/')">÷</button>
+<button class="calc-key" onclick="calcInput('7')">7</button><button class="calc-key" onclick="calcInput('8')">8</button><button class="calc-key" onclick="calcInput('9')">9</button><button class="calc-key operator" onclick="calcInput('*')">×</button>
+<button class="calc-key" onclick="calcInput('4')">4</button><button class="calc-key" onclick="calcInput('5')">5</button><button class="calc-key" onclick="calcInput('6')">6</button><button class="calc-key operator" onclick="calcInput('-')">−</button>
+<button class="calc-key" onclick="calcInput('1')">1</button><button class="calc-key" onclick="calcInput('2')">2</button><button class="calc-key" onclick="calcInput('3')">3</button><button class="calc-key operator" onclick="calcInput('+')">+</button>
+<button class="calc-key" onclick="calcInput('0')">0</button><button class="calc-key" onclick="calcInput('.')">.</button><button class="calc-key operator" onclick="calcDelete()">⌫</button><button class="calc-key equals" onclick="calcEquals()">=</button>
+</div></div></div>
 </div>
-<iframe class="frame" id="frame" title="JapanOS Browser"></iframe>
-<div class="fallback" id="fallback">
-<div class="fallback-inner">
-<h2>This page cannot be shown here</h2>
-<p>Some websites prevent other apps from displaying their pages inside a browser frame.</p>
-<a id="fallbackLink" href="#" target="_blank" rel="noopener">Open Page</a>
+
+<div class="window" id="settings">
+<div class="window-head"><div class="window-title">Settings</div><button class="window-button" onclick="closeWindow('settings')">×</button></div>
+<div class="settings-body">
+<div class="settings-section"><div class="setting-row"><div><div class="settings-label">Welcome screen</div><div class="settings-description">Show the introduction the next time JapanOS opens.</div></div><button class="toggle on" id="welcomeToggle" onclick="toggleSetting(this)"></button></div></div>
+<div class="settings-section"><div class="setting-row"><div><div class="settings-label">Desktop effects</div><div class="settings-description">Keep the glass and motion effects enabled.</div></div><button class="toggle on" onclick="toggleSetting(this)"></button></div></div>
+<div class="settings-section"><div class="setting-row"><div><div class="settings-label">JapanOS version</div><div class="settings-description">JapanOS 1.0</div></div><div style="font-size:12px;color:#9299a6">Stable</div></div></div>
 </div>
 </div>
-</div>
+
+<div class="window" id="gallery">
+<div class="window-head"><div class="window-title">Gallery</div><button class="window-button" onclick="closeWindow('gallery')">×</button></div>
+<div class="gallery-body">
+<div class="gallery-card"><img src="images/Japan.svg" alt="Japan"><div>JapanOS Background</div></div>
+<div class="gallery-card"><img src="images/Japan.svg" alt="Mount Fuji"><div>Mount Fuji</div></div>
+<div class="gallery-card"><img src="images/Japan.svg" alt="Japan night"><div>Japan Night</div></div>
 </div>
 </div>
 </div>
 
 <script>
+const windows=document.querySelectorAll(".window");
 const welcome=document.getElementById("welcome");
 const browser=document.getElementById("browser");
 const address=document.getElementById("address");
@@ -133,108 +131,31 @@ const frame=document.getElementById("frame");
 const home=document.getElementById("home");
 const fallback=document.getElementById("fallback");
 const fallbackLink=document.getElementById("fallbackLink");
+const notesArea=document.getElementById("notesArea");
 let history=[];
 let historyIndex=-1;
+let calcValue="";
 
-function enterOS(){
-welcome.classList.add("hidden");
-setTimeout(()=>welcome.remove(),600);
-}
-
-function updateClock(){
-const now=new Date();
-document.getElementById("clock").textContent=now.toLocaleTimeString([],{
-hour:"2-digit",
-minute:"2-digit"
-});
-}
-
-function openBrowser(){
-browser.classList.add("open");
-address.focus();
-}
-
-function closeBrowser(){
-browser.classList.remove("open");
-}
-
-function showHome(){
-home.style.display="flex";
-frame.classList.remove("open");
-fallback.classList.remove("show");
-address.value="japanos://home";
-}
-
-function normalizeUrl(value){
-let url=value.trim();
-if(!url)return "";
-if(url==="japanos://home")return url;
-if(!/^https?:\/\//i.test(url))url="https://"+url;
-return url;
-}
-
-function navigate(value,save=true){
-const url=normalizeUrl(value);
-if(!url)return;
-if(url==="japanos://home"){
-showHome();
-return;
-}
-home.style.display="none";
-fallback.classList.remove("show");
-frame.classList.remove("open");
-address.value=url;
-frame.src=url;
-frame.onload=()=>{
-frame.classList.add("open");
-};
-frame.onerror=()=>{
-frame.classList.remove("open");
-fallback.classList.add("show");
-fallbackLink.href=url;
-};
-if(save){
-history=history.slice(0,historyIndex+1);
-history.push(url);
-historyIndex=history.length-1;
-}
-}
-
-function addressKey(event){
-if(event.key==="Enter")navigate(address.value);
-}
-
-function searchWeb(event){
-event.preventDefault();
-const query=document.getElementById("searchInput").value.trim();
-if(!query)return;
-navigate("https://www.google.com/search?q="+encodeURIComponent(query));
-}
-
-function goBack(){
-if(historyIndex<=0){
-showHome();
-historyIndex=-1;
-return;
-}
-historyIndex--;
-navigate(history[historyIndex],false);
-}
-
-function goForward(){
-if(historyIndex>=history.length-1)return;
-historyIndex++;
-navigate(history[historyIndex],false);
-}
-
-function reloadPage(){
-if(address.value==="japanos://home"){
-showHome();
-return;
-}
-navigate(address.value,false);
-}
-
+function enterOS(){welcome.classList.add("hidden");setTimeout(()=>welcome.remove(),600)}
+function updateClock(){document.getElementById("clock").textContent=new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})}
+function openWindow(name){windows.forEach(w=>w.classList.remove("open"));document.getElementById(name).classList.add("open");if(name==="browser")address.focus()}
+function closeWindow(name){document.getElementById(name).classList.remove("open")}
+function showHome(){home.style.display="flex";frame.classList.remove("open");fallback.classList.remove("show");address.value="japanos://home"}
+function normalizeUrl(value){let url=value.trim();if(!url)return "";if(url==="japanos://home")return url;if(!/^https?:\/\//i.test(url))url="https://"+url;return url}
+function navigate(value,save=true){const url=normalizeUrl(value);if(!url)return;if(url==="japanos://home"){showHome();return}home.style.display="none";fallback.classList.remove("show");frame.classList.remove("open");address.value=url;frame.src=url;frame.onload=()=>frame.classList.add("open");if(save){history=history.slice(0,historyIndex+1);history.push(url);historyIndex=history.length-1}}
+function addressKey(event){if(event.key==="Enter")navigate(address.value)}
+function searchWeb(event){event.preventDefault();const query=document.getElementById("searchInput").value.trim();if(query)navigate("https://www.google.com/search?q="+encodeURIComponent(query))}
+function goBack(){if(historyIndex<=0){showHome();historyIndex=-1;return}historyIndex--;navigate(history[historyIndex],false)}
+function goForward(){if(historyIndex>=history.length-1)return;historyIndex++;navigate(history[historyIndex],false)}
+function reloadPage(){if(address.value==="japanos://home")showHome();else navigate(address.value,false)}
+function toggleSetting(button){button.classList.toggle("on")}
+notesArea.value=localStorage.getItem("japanos-notes")||"";
+notesArea.addEventListener("input",()=>localStorage.setItem("japanos-notes",notesArea.value));
+function calcInput(value){if(calcValue==="Error")calcValue="";calcValue+=value;document.getElementById("calcDisplay").textContent=calcValue||"0"}
+function calcClear(){calcValue="";document.getElementById("calcDisplay").textContent="0"}
+function calcDelete(){calcValue=calcValue.slice(0,-1);document.getElementById("calcDisplay").textContent=calcValue||"0"}
+function calcEquals(){if(!calcValue)return;try{if(!/^[0-9+*/(). -]+$/.test(calcValue))throw new Error();const result=Function("return "+calcValue)();if(!Number.isFinite(result))throw new Error();calcValue=String(result);document.getElementById("calcDisplay").textContent=calcValue}catch(e){calcValue="Error";document.getElementById("calcDisplay").textContent="Error"}}
+document.addEventListener("keydown",event=>{if(event.key==="Escape")windows.forEach(w=>w.classList.remove("open"))});
 updateClock();
 setInterval(updateClock,1000);
 </script>
