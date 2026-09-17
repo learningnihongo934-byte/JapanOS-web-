@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JapanOS</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow:hidden;background:#08090d;color:#fff}
+button,input{font:inherit}
+button{border:0}
+.desktop{position:relative;width:100%;height:100vh;overflow:hidden;background:url("images/Japan.svg") center/cover no-repeat}
+.desktop:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,13,.2),rgba(5,7,13,.05) 55%,rgba(5,7,13,.28));pointer-events:none}
+.topbar{position:absolute;z-index:20;top:0;left:0;width:100%;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(8,10,16,.78);border-bottom:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px)}
+.brand{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.brand span{color:#f08ba8}
+.creator{font-size:12px;color:#d8d8dd;margin-right:18px}
+.bar-right{display:flex;align-items:center}
+.clock{font-size:13px;color:#e7e7eb;min-width:72px;text-align:right}
+.workspace{position:absolute;z-index:2;inset:52px 0 0;padding:28px}
+.app{width:82px;text-align:center;cursor:pointer;user-select:none}
+.app-icon{width:68px;height:68px;margin:auto;border-radius:17px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.3),0 0 0 1px rgba(255,255,255,.16);transition:transform .16s ease}
+.app:hover .app-icon{transform:translateY(-4px) scale(1.03)}
+.app img{width:100%;height:100%;display:block}
+.app-name{font-size:12px;margin-top:8px;text-shadow:0 2px 5px rgba(0,0,0,.8)}
+.welcome{position:fixed;z-index:100;inset:0;display:flex;align-items:center;justify-content:center;background:url("images/Japan.svg") center/cover no-repeat;transition:opacity .55s ease,visibility .55s ease}
+.welcome:after{content:"";position:absolute;inset:0;background:rgba(4,5,10,.48)}
+.welcome-card{position:relative;z-index:1;width:min(600px,calc(100% - 40px));padding:58px 44px;text-align:center;border:1px solid rgba(255,255,255,.18);border-radius:28px;background:rgba(10,12,20,.54);box-shadow:0 30px 80px rgba(0,0,0,.42);backdrop-filter:blur(22px)}
+.welcome-kicker{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#f3a0b8;margin-bottom:18px}
+.welcome h1{font-size:clamp(48px,8vw,82px);line-height:.95;margin:0;letter-spacing:-4px}
+.welcome h1 span{color:#f08ba8}
+.welcome p{margin:20px 0 30px;color:#d9d9df;font-size:15px}
+.start{padding:13px 27px;border-radius:999px;background:#fff;color:#101116;cursor:pointer;font-weight:650;transition:transform .15s ease,box-shadow .15s ease}
+.start:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,255,255,.16)}
+.hidden{opacity:0;visibility:hidden}
+.browser{position:absolute;z-index:30;top:85px;left:50%;width:min(980px,calc(100% - 48px));height:min(690px,calc(100% - 115px));transform:translateX(-50%) scale(.97);display:none;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.17);border-radius:18px;background:#0c0f15;box-shadow:0 28px 80px rgba(0,0,0,.52)}
+.browser.open{display:flex;animation:browserIn .2s ease forwards}
+@keyframes browserIn{to{transform:translateX(-50%) scale(1)}}
+.browser-head{height:54px;display:flex;align-items:center;gap:9px;padding:0 12px;background:#11151d;border-bottom:1px solid rgba(255,255,255,.1)}
+.browser-controls{display:flex;gap:5px}
+.control{width:32px;height:32px;border-radius:9px;background:#1b202a;color:#d9dce2;cursor:pointer}
+.control:hover{background:#252b37}
+.address{flex:1;height:34px;padding:0 13px;border:1px solid rgba(255,255,255,.11);border-radius:10px;outline:none;background:#0b0e14;color:#e9eaf0;font-size:13px}
+.close-browser{width:32px;height:32px;border-radius:9px;background:#1b202a;color:#ddd;cursor:pointer}
+.browser-page{position:relative;flex:1;background:#0b0d12}
+.home{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(238,119,154,.12),transparent 35%),#0b0d12}
+.home-logo{font-size:46px;font-weight:700;letter-spacing:-2px}
+.home-logo span{color:#f08ba8}
+.home-text{color:#969ba7;font-size:13px;margin:8px 0 22px}
+.search{display:flex;width:min(570px,80%);height:44px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#11151d;overflow:hidden}
+.search input{flex:1;background:transparent;border:0;outline:0;color:white;padding:0 15px;font-size:14px}
+.search button{width:78px;background:#f08ba8;color:#171019;cursor:pointer;font-weight:650}
+.frame{width:100%;height:100%;border:0;background:#fff;display:none}
+.frame.open{display:block}
+.fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;background:#0b0d12}
+.fallback.show{display:flex}
+.fallback-inner{max-width:430px}
+.fallback h2{margin:0 0 10px}
+.fallback p{color:#9ea4af;font-size:14px;line-height:1.5}
+.fallback a{display:inline-block;margin-top:12px;padding:10px 16px;border-radius:9px;background:#f08ba8;color:#171019;text-decoration:none;font-weight:650}
+@media(max-width:650px){
+.topbar{padding:0 12px}.creator{display:none}.workspace{padding:22px}
+.browser{width:calc(100% - 20px);height:calc(100% - 82px);top:64px}
+.browser-head{gap:5px}.control{width:30px;height:30px}.close-browser{width:30px;height:30px}
+.welcome-card{padding:45px 25px}.welcome h1{letter-spacing:-2px}
+}
+</style>
+</head>
+<body>
+<div class="welcome" id="welcome">
+<div class="welcome-card">
+<div class="welcome-kicker">JapanOS</div>
+<h1>Welcome to <span>JapanOS</span></h1>
+<p>A clean desktop inspired by Japan, built to keep everything simple and close at hand.</p>
+<button class="start" onclick="enterOS()">Get Started</button>
+</div>
+</div>
+
+<div class="desktop">
+<div class="topbar">
+<div class="brand">Japan<span>OS</span></div>
+<div class="bar-right">
+<div class="creator">Created By Virat Reddy</div>
+<div class="clock" id="clock"></div>
+</div>
+</div>
+
+<div class="workspace">
+<div class="app" onclick="openBrowser()">
+<div class="app-icon"><img src="images/Browser.svg" alt="Browser"></div>
+<div class="app-name">Browser</div>
+</div>
+</div>
+
+<div class="browser" id="browser">
+<div class="browser-head">
+<div class="browser-controls">
+<button class="control" onclick="goBack()">←</button>
+<button class="control" onclick="goForward()">→</button>
+<button class="control" onclick="reloadPage()">↻</button>
+</div>
+<input class="address" id="address" value="japanos://home" onkeydown="addressKey(event)">
+<button class="close-browser" onclick="closeBrowser()">×</button>
+</div>
+<div class="browser-page">
+<div class="home" id="home">
+<div class="home-logo">Japan<span>OS</span></div>
+<div class="home-text">Search the web from JapanOS</div>
+<form class="search" onsubmit="searchWeb(event)">
+<input id="searchInput" placeholder="Search the web">
+<button type="submit">Search</button>
+</form>
+</div>
+<iframe class="frame" id="frame" title="JapanOS Browser"></iframe>
+<div class="fallback" id="fallback">
+<div class="fallback-inner">
+<h2>This page cannot be shown here</h2>
+<p>Some websites prevent other apps from displaying their pages inside a browser frame.</p>
+<a id="fallbackLink" href="#" target="_blank" rel="noopener">Open Page</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+const welcome=document.getElementById("welcome");
+const browser=document.getElementById("browser");
+const address=document.getElementById("address");
+const frame=document.getElementById("frame");
+const home=document.getElementById("home");
+const fallback=document.getElementById("fallback");
+const fallbackLink=document.getElementById("fallbackLink");
+let history=[];
+let historyIndex=-1;
+
+function enterOS(){
+welcome.classList.add("hidden");
+setTimeout(()=>welcome.remove(),600);
+}
+
+function updateClock(){
+const now=new Date();
+document.getElementById("clock").textContent=now.toLocaleTimeString([],{
+hour:"2-digit",
+minute:"2-digit"
+});
+}
+
+function openBrowser(){
+browser.classList.add("open");
+address.focus();
+}
+
+function closeBrowser(){
+browser.classList.remove("open");
+}
+
+function showHome(){
+home.style.display="flex";
+frame.classList.remove("open");
+fallback.classList.remove("show");
+address.value="japanos://home";
+}
+
+function normalizeUrl(value){
+let url=value.trim();
+if(!url)return "";
+if(url==="japanos://home")return url;
+if(!/^https?:\/\//i.test(url))url="https://"+url;
+return url;
+}
+
+function navigate(value,save=true){
+const url=normalizeUrl(value);
+if(!url)return;
+if(url==="japanos://home"){
+showHome();
+return;
+}
+home.style.display="none";
+fallback.classList.remove("show");
+frame.classList.remove("open");
+address.value=url;
+frame.src=url;
+frame.onload=()=>{
+frame.classList.add("open");
+};
+frame.onerror=()=>{
+frame.classList.remove("open");
+fallback.classList.add("show");
+fallbackLink.href=url;
+};
+if(save){
+history=history.slice(0,historyIndex+1);
+history.push(url);
+historyIndex=history.length-1;
+}
+}
+
+function addressKey(event){
+if(event.key==="Enter")navigate(address.value);
+}
+
+function searchWeb(event){
+event.preventDefault();
+const query=document.getElementById("searchInput").value.trim();
+if(!query)return;
+navigate("https://www.google.com/search?q="+encodeURIComponent(query));
+}
+
+function goBack(){
+if(historyIndex<=0){
+showHome();
+historyIndex=-1;
+return;
+}
+historyIndex--;
+navigate(history[historyIndex],false);
+}
+
+function goForward(){
+if(historyIndex>=history.length-1)return;
+historyIndex++;
+navigate(history[historyIndex],false);
+}
+
+function reloadPage(){
+if(address.value==="japanos://home"){
+showHome();
+return;
+}
+navigate(address.value,false);
+}
+
+updateClock();
+setInterval(updateClock,1000);
+</script>
+</body>
+</html>
