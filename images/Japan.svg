@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#10182f"/>
+<stop offset=".48" stop-color="#50365c"/>
+<stop offset="1" stop-color="#171525"/>
+</linearGradient>
+<linearGradient id="mountain" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#151a32"/>
+<stop offset="1" stop-color="#090b16"/>
+</linearGradient>
+<linearGradient id="city" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#1b1b31"/>
+<stop offset="1" stop-color="#080910"/>
+</linearGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<rect width="1920" height="1080" fill="url(#sky)"/>
+<circle cx="1460" cy="265" r="120" fill="#f2a3ba" opacity=".22" filter="url(#glow)"/>
+<circle cx="1460" cy="265" r="75" fill="#ffd1dc" opacity=".12"/>
+<path d="M0 610L210 455 380 570 560 430 770 590 960 350 1150 575 1330 440 1510 580 1710 395 1920 540V1080H0Z" fill="#252440" opacity=".55"/>
+<path d="M570 790L965 240 1360 790Z" fill="url(#mountain)"/>
+<path d="M965 240L1050 370 1005 350 965 405 920 355 870 390Z" fill="#d9d9df" opacity=".8"/>
+<path d="M0 800L300 680 540 775 780 660 1030 810 1260 690 1510 790 1740 650 1920 750V1080H0Z" fill="url(#city)"/>
+<g fill="#f3b7a8" opacity=".75">
+<circle cx="180" cy="875" r="3"/><circle cx="250" cy="915" r="3"/><circle cx="340" cy="850" r="3"/><circle cx="430" cy="945" r="3"/><circle cx="520" cy="885" r="3"/><circle cx="610" cy="970" r="3"/><circle cx="720" cy="900" r="3"/><circle cx="810" cy="950" r="3"/><circle cx="920" cy="890" r="3"/><circle cx="1040" cy="975" r="3"/><circle cx="1160" cy="900" r="3"/><circle cx="1270" cy="955" r="3"/><circle cx="1390" cy="875" r="3"/><circle cx="1510" cy="940" r="3"/><circle cx="1640" cy="860" r="3"/><circle cx="1760" cy="930" r="3"/>
+</g>
+<g fill="#17121e">
+<path d="M1520 530h280v35h-280z"/><path d="M1570 500h180v30h-180z"/><path d="M1610 465h100v35h-100z"/><path d="M1650 420h20v45h-20z"/>
+<path d="M1450 565h420l-80 25h-260z"/>
+</g>
+<g stroke="#f08ba8" stroke-width="8" fill="none" opacity=".35">
+<path d="M70 190C250 80 360 300 520 170"/><path d="M90 250C270 140 370 360 540 230"/>
+</g>
+<g fill="#f08ba8" opacity=".8">
+<circle cx="100" cy="190" r="12"/><circle cx="150" cy="165" r="9"/><circle cx="215" cy="145" r="11"/><circle cx="280" cy="175" r="8"/><circle cx="350" cy="215" r="12"/><circle cx="430" cy="190" r="9"/><circle cx="500" cy="165" r="11"/>
+</g>
+<rect width="1920" height="1080" fill="#070812" opacity=".12"/>
+</svg>
