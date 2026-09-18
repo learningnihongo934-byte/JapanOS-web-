@@ -142,7 +142,7 @@ function openWindow(name){windows.forEach(w=>w.classList.remove("open"));documen
 function closeWindow(name){document.getElementById(name).classList.remove("open")}
 function showHome(){home.style.display="flex";frame.classList.remove("open");fallback.classList.remove("show");address.value="japanos://home"}
 function normalizeUrl(value){let url=value.trim();if(!url)return "";if(url==="japanos://home")return url;if(!/^https?:\/\//i.test(url))url="https://"+url;return url}
-function navigate(value,save=true){const url=normalizeUrl(value);if(!url)return;if(url==="japanos://home"){showHome();return}home.style.display="none";fallback.classList.remove("show");frame.classList.remove("open");address.value=url;frame.src=url;frame.onload=()=>frame.classList.add("open");if(save){history=history.slice(0,historyIndex+1);history.push(url);historyIndex=history.length-1}}
+function navigate(value,save=true){const url=normalizeUrl(value);if(!url)return;if(url==="japanos://home"){showHome();return}home.style.display="none";frame.classList.remove("open");fallback.classList.remove("show");address.value=url;if(save){history=history.slice(0,historyIndex+1);history.push(url);historyIndex=history.length-1}window.open(url,"_blank","noopener")}
 function addressKey(event){if(event.key==="Enter")navigate(address.value)}
 function searchWeb(event){event.preventDefault();const query=document.getElementById("searchInput").value.trim();if(query)navigate("https://www.google.com/search?q="+encodeURIComponent(query))}
 function goBack(){if(historyIndex<=0){showHome();historyIndex=-1;return}historyIndex--;navigate(history[historyIndex],false)}
